@@ -1,0 +1,307 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ShopSphere | Online Shopping</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+<header>
+    <div class="logo">Shop<span>Sphere.</span></div>
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="#products">Products</a>
+        <a href="#discount">Discount Calculator</a>
+        <a href="#about">About</a>
+    </nav>
+
+    <a href="#products" class="nav-button">Explore Store ↓</a>
+</header>
+
+
+<!-- HERO SECTION -->
+<section class="hero">
+
+    <div class="hero-content">
+
+        <p class="tagline">WELCOME TO SHOPSPHERE</p>
+
+        <h1>
+            Everything you need.<br>
+            <span>All in one place.</span>
+        </h1>
+
+        <p class="hero-description">
+            Discover quality products at amazing prices.
+            Your favourite shopping destination.
+        </p>
+
+        <a href="#products" class="shop-btn">
+            Shop Now →
+        </a>
+
+    </div>
+
+    <div class="hero-icon">🛍️</div>
+
+</section>
+
+
+<!-- PRODUCTS SECTION -->
+<section class="products-section" id="products">
+
+    <div class="section-heading">
+
+        <div>
+            <p class="tagline">OUR COLLECTION</p>
+            <h2>Explore Products</h2>
+        </div>
+
+        <p>{{ products|length }} products available</p>
+
+    </div>
+
+
+    <div class="product-grid">
+
+        {% for product in products %}
+
+        <div class="product-card">
+
+            <div class="product-image">
+                🛒
+            </div>
+
+            <div class="product-info">
+
+                <span class="product-id">
+                    PRODUCT #{{ product.id }}
+                </span>
+
+                <h3>{{ product.name }}</h3>
+
+                <p class="price">
+                    ₹{{ "%.2f"|format(product.price) }}
+                </p>
+
+                {% if product.stock > 0 %}
+
+                    <p class="stock available">
+                        ● {{ product.stock }} units in stock
+                    </p>
+
+                {% else %}
+
+                    <p class="stock unavailable">
+                        ● Out of stock
+                    </p>
+
+                {% endif %}
+
+                <button
+                    class="add-btn"
+                    {% if product.stock <= 0 %}disabled{% endif %}
+                    onclick="alert('Shopping cart functionality is coming soon!')">
+
+                    {% if product.stock > 0 %}
+                        View Product
+                    {% else %}
+                        Unavailable
+                    {% endif %}
+
+                </button>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+
+<!-- DISCOUNT CALCULATOR -->
+<section class="discount-section" id="discount">
+
+    <div class="discount-container">
+
+        <div class="discount-heading">
+
+            <p class="tagline">POWERED BY ORACLE PL/SQL</p>
+
+            <h2>Smart Discount Calculator</h2>
+
+            <p>
+                Calculate your savings using our
+                Oracle database function.
+            </p>
+
+        </div>
+
+
+        <div class="calculator">
+
+            <label for="amount">
+                Enter Purchase Amount (₹)
+            </label>
+
+            <input
+                type="number"
+                id="amount"
+                placeholder="Example: 2000"
+                min="0.01"
+                step="0.01"
+            >
+
+            <button onclick="calculateDiscount()">
+                Calculate My Discount →
+            </button>
+
+            <div id="discount-result"></div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ABOUT SECTION -->
+<section class="about-section" id="about">
+
+    <p class="tagline">ABOUT US</p>
+
+    <h2>Welcome to ShopSphere.</h2>
+
+    <p>
+        ShopSphere is an e-commerce order management system
+        powered by Oracle Database and PL/SQL.
+        It provides product management, order processing,
+        discount calculation and inventory tracking.
+    </p>
+
+    <div class="technology-list">
+
+        <span>Python Flask</span>
+        <span>Oracle Database</span>
+        <span>PL/SQL</span>
+        <span>HTML & CSS</span>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+
+    <h2>ShopSphere<span>.</span></h2>
+
+    <p>Your one-stop shopping destination.</p>
+
+    <p class="copyright">
+        © 2026 ShopSphere. All rights reserved.
+    </p>
+
+</footer>
+
+
+<!-- DISCOUNT CALCULATOR JAVASCRIPT -->
+<script>
+
+async function calculateDiscount() {
+
+    const amount = document.getElementById("amount").value;
+
+    const result = document.getElementById("discount-result");
+
+    if (!amount || Number(amount) <= 0) {
+
+        result.innerHTML =
+            '<p class="error-message">Please enter a valid amount.</p>';
+
+        return;
+    }
+
+    result.innerHTML =
+        '<p class="loading-message">Calculating your discount...</p>';
+
+    try {
+
+        const response = await fetch("/calculate-discount", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                amount: amount
+            })
+
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error || "Calculation failed.");
+        }
+
+        result.innerHTML = `
+
+            <div class="result-card">
+
+                <p>
+                    Purchase Amount:
+                    <strong>₹${data.original_amount.toFixed(2)}</strong>
+                </p>
+
+                <p>
+                    Discount Applied:
+                    <strong class="discount-value">
+                        ₹${data.discount.toFixed(2)}
+                    </strong>
+                </p>
+
+                <div class="result-divider"></div>
+
+                <h3>
+                    Final Amount:
+                    ₹${data.final_amount.toFixed(2)}
+                </h3>
+
+                <p class="oracle-message">
+                    ✓ Calculated successfully using Oracle PL/SQL
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+    catch (error) {
+
+        result.innerHTML =
+            `<p class="error-message">Error: ${error.message}</p>`;
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>

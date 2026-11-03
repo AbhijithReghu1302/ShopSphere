@@ -1,0 +1,526 @@
+
+/* GENERAL STYLING */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f7f8fc;
+    color: #172033;
+}
+
+
+/* NAVIGATION */
+
+header {
+    min-height: 75px;
+    padding: 0 8%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: white;
+    box-shadow: 0 2px 15px #00000008;
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: 800;
+}
+
+.logo span,
+footer h2 span {
+    color: #6755e8;
+}
+
+nav {
+    display: flex;
+    gap: 28px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #444;
+    font-size: 15px;
+    transition: color 0.2s;
+}
+
+nav a:hover {
+    color: #6755e8;
+}
+
+.nav-button,
+.shop-btn {
+    background: #6755e8;
+    color: white;
+    padding: 13px 22px;
+    border-radius: 9px;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.nav-button:hover,
+.shop-btn:hover {
+    background: #5140cf;
+}
+
+
+/* HERO SECTION */
+
+.hero {
+    min-height: 420px;
+    padding: 65px 9%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: linear-gradient(
+        120deg,
+        #eeeaff,
+        #e5f1ff
+    );
+}
+
+.tagline {
+    color: #6755e8;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.hero h1 span {
+    color: #6755e8;
+}
+
+.hero-description {
+    color: #666;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.hero-icon {
+    font-size: 130px;
+}
+
+
+/* PRODUCTS SECTION */
+
+.products-section {
+    padding: 70px 8%;
+}
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 35px;
+}
+
+.section-heading h2 {
+    font-size: 32px;
+}
+
+.section-heading > p {
+    color: #777;
+}
+
+.product-grid {
+    display: grid;
+
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(220px, 1fr)
+    );
+
+    gap: 25px;
+}
+
+.product-card {
+    background: white;
+    border-radius: 14px;
+    overflow: hidden;
+
+    box-shadow: 0 5px 20px #00000008;
+
+    transition: transform 0.25s,
+                box-shadow 0.25s;
+}
+
+.product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px #00000012;
+}
+
+.product-image {
+    height: 155px;
+
+    display: grid;
+    place-items: center;
+
+    background: #efedff;
+    font-size: 55px;
+}
+
+.product-info {
+    padding: 22px;
+}
+
+.product-id {
+    color: #888;
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+.product-info h3 {
+    margin: 13px 0;
+    min-height: 40px;
+    font-size: 18px;
+}
+
+.price {
+    font-size: 22px;
+    font-weight: bold;
+    color: #6755e8;
+}
+
+.stock {
+    font-size: 12px;
+    margin: 14px 0;
+}
+
+.available {
+    color: #15945c;
+}
+
+.unavailable {
+    color: #dc3545;
+}
+
+.add-btn {
+    width: 100%;
+    padding: 13px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #6755e8;
+    color: white;
+
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.add-btn:hover:not(:disabled) {
+    background: #5140cf;
+}
+
+.add-btn:disabled {
+    background: #999;
+    cursor: not-allowed;
+}
+
+
+/* DISCOUNT CALCULATOR */
+
+.discount-section {
+    padding: 75px 8%;
+
+    background: linear-gradient(
+        120deg,
+        #eeeaff,
+        #e5f1ff
+    );
+}
+
+.discount-container {
+    max-width: 850px;
+    margin: auto;
+}
+
+.discount-heading {
+    text-align: center;
+}
+
+.discount-heading h2 {
+    font-size: 34px;
+    margin-bottom: 15px;
+}
+
+.discount-heading > p:last-child {
+    color: #666;
+    line-height: 1.6;
+}
+
+.calculator {
+    max-width: 520px;
+    margin: 35px auto 0;
+
+    padding: 30px;
+
+    background: white;
+    border-radius: 15px;
+
+    box-shadow: 0 8px 30px #0000000c;
+}
+
+.calculator label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.calculator input {
+    width: 100%;
+    padding: 15px;
+
+    border: 1px solid #ddd;
+    border-radius: 8px;
+
+    font-size: 16px;
+    outline: none;
+
+    margin-bottom: 18px;
+}
+
+.calculator input:focus {
+    border-color: #6755e8;
+}
+
+.calculator button {
+    width: 100%;
+    padding: 15px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #6755e8;
+    color: white;
+
+    font-size: 15px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.calculator button:hover {
+    background: #5140cf;
+}
+
+
+/* CALCULATION RESULT */
+
+.result-card {
+    margin-top: 25px;
+    padding: 22px;
+
+    background: #f7f6ff;
+    border-radius: 10px;
+
+    line-height: 2.4;
+}
+
+.result-card > p {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.discount-value {
+    color: #15945c;
+}
+
+.result-divider {
+    height: 1px;
+    background: #ddd;
+    margin: 12px 0;
+}
+
+.result-card h3 {
+    color: #6755e8;
+    font-size: 21px;
+    margin-top: 8px;
+}
+
+.oracle-message {
+    color: #15945c;
+    font-size: 12px;
+    margin-top: 12px;
+}
+
+.error-message {
+    margin-top: 15px;
+    color: #dc3545;
+    font-size: 14px;
+}
+
+.loading-message {
+    margin-top: 15px;
+    color: #6755e8;
+    font-size: 14px;
+}
+
+
+/* ABOUT SECTION */
+
+.about-section {
+    padding: 70px 10%;
+    text-align: center;
+    background: white;
+}
+
+.about-section h2 {
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.about-section > p:not(.tagline) {
+    max-width: 700px;
+    margin: auto;
+    color: #666;
+    line-height: 1.8;
+}
+
+.technology-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 28px;
+}
+
+.technology-list span {
+    background: #efedff;
+    color: #6755e8;
+
+    padding: 10px 18px;
+    border-radius: 20px;
+
+    font-size: 13px;
+    font-weight: bold;
+}
+
+
+/* FOOTER */
+
+footer {
+    text-align: center;
+    padding: 40px 20px;
+
+    background: #172033;
+    color: white;
+    line-height: 2;
+}
+
+footer h2 {
+    font-size: 27px;
+}
+
+footer p {
+    color: #c5c9d4;
+}
+
+.copyright {
+    margin-top: 15px;
+    font-size: 12px;
+}
+
+
+/* RESPONSIVE DESIGN */
+
+@media (max-width: 850px) {
+
+    header {
+        padding: 18px 5%;
+        flex-wrap: wrap;
+        gap: 18px;
+    }
+
+    nav {
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .hero {
+        padding: 55px 7%;
+    }
+
+    .hero h1 {
+        font-size: 38px;
+    }
+
+    .hero-icon {
+        font-size: 90px;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    header {
+        justify-content: center;
+    }
+
+    nav {
+        justify-content: center;
+    }
+
+    .nav-button {
+        display: none;
+    }
+
+    .hero {
+        padding: 50px 7%;
+    }
+
+    .hero h1 {
+        font-size: 32px;
+    }
+
+    .hero-icon {
+        display: none;
+    }
+
+    .products-section {
+        padding: 45px 5%;
+    }
+
+    .section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .discount-section {
+        padding: 55px 5%;
+    }
+
+    .discount-heading h2 {
+        font-size: 27px;
+    }
+
+    .calculator {
+        padding: 22px;
+    }
+
+}
